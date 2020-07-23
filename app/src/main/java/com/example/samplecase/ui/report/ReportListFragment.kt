@@ -1,20 +1,25 @@
 package com.example.samplecase.ui.report
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.samplecase.R
+import com.example.samplecase.domain.report.model.Report
 import kotlinx.android.synthetic.main.fragment_report_list.*
 
 class ReportListFragment : Fragment() {
 
-    val viewModel: ReportListViewModel by viewModels()
+    private val TAG = "examination"
+
+    private val viewModel: ReportListViewModel by activityViewModels()
 
     private val reportListRecyclerAdapter by lazy {
         ReportListRecyclerAdapter()
@@ -44,13 +49,18 @@ class ReportListFragment : Fragment() {
 
         recyclerViewReportList.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = reportListRecyclerAdapter
-
+            adapter = reportListRecyclerAdapter.apply {
+                setItemClickListener {
+                    findNavController().navigate(
+                        ReportListFragmentDirections.actionReportListToReportDetails(it)
+                    )
+                }
+            }
 
         }
 
         buttonDate.setOnClickListener() {
-            findNavController().navigate(ReportListFragmentDirections.actionReportListToReportDetails())
+            findNavController().navigate(ReportListFragmentDirections.actionFragmentReportListToDialogDatePicker())
         }
     }
 
@@ -58,6 +68,7 @@ class ReportListFragment : Fragment() {
 
         viewModel.reportList.observe(viewLifecycleOwner, Observer {
             reportListRecyclerAdapter.assignReports(it.toList())
+            Log.i(TAG,"reportList updated")
         })
     }
 }

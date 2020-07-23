@@ -3,6 +3,9 @@ package com.example.samplecase.ui.report
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.samplecase.R
 import com.example.samplecase.domain.report.model.Report
@@ -13,11 +16,23 @@ class ReportListRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(
 
     private var reports: List<Report> = ArrayList()
 
+    private var onItemClick: ((Report) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ReportViewHolder(
+        val reportViewHolder = ReportViewHolder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.recycler_item_report, parent, false)
         )
+
+        onItemClick?.let { listener ->
+            reportViewHolder.setItemClickListener { position ->
+                getItem(position)?.let { item ->
+                    listener(item)
+                }
+            }
+        }
+
+        return reportViewHolder
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -37,10 +52,22 @@ class ReportListRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(
         notifyDataSetChanged()
     }
 
-    class ReportViewHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val reportImageView = itemView.imageViewReportImage
-        val reportTitleView = itemView.textViewReportTitle
-        val reportDescriptionView = itemView.textViewReportDescription
+    fun setItemClickListener(onItemClick: ((Report) -> Unit)) {
+        this.onItemClick = onItemClick
+    }
+
+    private fun getItem(position: Int): Report? {
+        return reports.getOrNull(position)
+    }
+
+    class ReportViewHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView),
+        View.OnClickListener {
+
+        private var onItemClick: ((Int) -> Unit)? = null
+
+        private val reportImageView: AppCompatImageView? = itemView.imageViewReportImage
+        private val reportTitleView: AppCompatTextView? = itemView.textViewReportTitle
+        private val reportDescriptionView: AppCompatTextView? = itemView.textViewReportDescription
 
         fun bind(report: Report) {
 
@@ -49,8 +76,16 @@ class ReportListRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.ic_launcher_foreground)
                 .into(reportImageView)
-            reportTitleView.text = report.title
-            reportDescriptionView.text = report.description
+            reportTitleView?.text = report.title
+            reportDescriptionView?.text = report.description
+        }
+
+        fun setItemClickListener(onItemClick: (Int) -> Unit) {
+            this.onItemClick = onItemClick
+            this.itemView.setOnClickListener(this)
+        }
+        override fun onClick(v: View?) {
+            onItemClick?.invoke(adapterPosition)
         }
     }
 }

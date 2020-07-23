@@ -1,17 +1,19 @@
 package com.example.samplecase.data
 
-import com.google.gson.Gson
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ReportRemoteDataSource {
+object ReportRemoteDataSource {
 
-    companion object{
+    var reportService: ReportService
 
-        fun getReportRemoteDataSource() : Retrofit {
-            return Retrofit.Builder().
-            baseUrl("https://newsapi.org/v2/").
-            addConverterFactory(GsonConverterFactory.create()).build()
-        }
+    init {
+        val baseUrl = "https://newsapi.org/v2/"
+        val retrofit = Retrofit.Builder().baseUrl(baseUrl)
+            .addConverterFactory(GsonConverterFactory.create()).build()
+
+        reportService = retrofit.create(ReportService::class.java)
     }
+
+
 }

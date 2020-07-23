@@ -1,5 +1,8 @@
 package com.example.samplecase.domain.report.model
 
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Report(
     val source : Source?,
     val author: String?,
@@ -10,4 +13,4 @@ data class Report(
     val publishedAt: String?,
     val content: String?
 
-)
+) : BaseItem()
