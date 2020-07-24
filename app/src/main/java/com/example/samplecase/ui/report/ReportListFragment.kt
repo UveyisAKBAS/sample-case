@@ -7,17 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.samplecase.R
-import com.example.samplecase.domain.report.model.Report
 import kotlinx.android.synthetic.main.fragment_report_list.*
 
 class ReportListFragment : Fragment() {
-
-    private val TAG = "examination"
 
     private val viewModel: ReportListViewModel by activityViewModels()
 
@@ -56,7 +52,6 @@ class ReportListFragment : Fragment() {
                     )
                 }
             }
-
         }
 
         buttonDate.setOnClickListener() {
@@ -68,7 +63,6 @@ class ReportListFragment : Fragment() {
 
         viewModel.reportList.observe(viewLifecycleOwner, Observer {
             reportListRecyclerAdapter.assignReports(it.toList())
-            Log.i(TAG,"reportList updated")
         })
     }
 }

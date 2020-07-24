@@ -33,7 +33,10 @@ class ReportDetailsFragment : Fragment() {
 
     private fun initViews() {
         args.argumentReportUrl?.url.let {reportUrl ->
-            webViewReportDescription.loadUrl(reportUrl)
+            if (reportUrl != null) {
+                webViewReportDescription.loadUrl(reportUrl)
+            }
+
         }
 
     }

@@ -1,4 +1,4 @@
-package com.example.samplecase.data
+package com.example.samplecase.data.net
 
 import com.example.samplecase.data.model.ReportResponse
 import retrofit2.Call

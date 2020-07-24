@@ -3,4 +3,8 @@
     <color name="colorPrimary">#000000</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#000000</color>
+    <color name="cardViewBackground">#E6E6E6</color>
+    <color name="titleBackground">#E1DFDF</color>
+
+
 </resources>

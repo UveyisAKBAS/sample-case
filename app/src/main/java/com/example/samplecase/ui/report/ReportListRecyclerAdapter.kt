@@ -36,11 +36,7 @@ class ReportListRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder) {
-            is ReportViewHolder -> {
-                holder.bind(reports.get(position))
-            }
-        }
+        (holder as ReportViewHolder).bind(reports.get(position))
     }
 
     override fun getItemCount(): Int {
@@ -60,33 +56,36 @@ class ReportListRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(
         return reports.getOrNull(position)
     }
 
-    class ReportViewHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView),
-        View.OnClickListener {
+}
 
-        private var onItemClick: ((Int) -> Unit)? = null
+class ReportViewHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView),
+    View.OnClickListener {
 
-        private val reportImageView: AppCompatImageView? = itemView.imageViewReportImage
-        private val reportTitleView: AppCompatTextView? = itemView.textViewReportTitle
-        private val reportDescriptionView: AppCompatTextView? = itemView.textViewReportDescription
+    private var onItemClick: ((Int) -> Unit)? = null
 
-        fun bind(report: Report) {
+    private val reportImageView: AppCompatImageView? = itemView.imageViewReportImage
+    private val reportTitleView: AppCompatTextView? = itemView.textViewReportTitle
+    private val reportDescriptionView: AppCompatTextView? = itemView.textViewReportDescription
+    // Kotlin android recyclerview ...
 
-            Picasso.get()
-                .load(report.urlToImage)
-                .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.ic_launcher_foreground)
-                .into(reportImageView)
-            reportTitleView?.text = report.title
-            reportDescriptionView?.text = report.description
-        }
+    fun bind(report: Report) {
 
-        fun setItemClickListener(onItemClick: (Int) -> Unit) {
-            this.onItemClick = onItemClick
-            this.itemView.setOnClickListener(this)
-        }
-        override fun onClick(v: View?) {
-            onItemClick?.invoke(adapterPosition)
-        }
+        Picasso.get()
+            .load(report.urlToImage)
+            .placeholder(R.drawable.ic_launcher_background)
+            .error(R.drawable.ic_launcher_foreground)
+            .into(reportImageView)
+        reportTitleView?.text = report.title
+        reportDescriptionView?.text = report.description
+    }
+
+    fun setItemClickListener(onItemClick: (Int) -> Unit) {
+        this.onItemClick = onItemClick
+        this.itemView.setOnClickListener(this)
+    }
+
+    override fun onClick(v: View?) {
+        onItemClick?.invoke(adapterPosition)
     }
 }
 

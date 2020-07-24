@@ -1,4 +1,4 @@
-package com.example.samplecase.ui
+package com.example.samplecase.ui.datepicker
 
 import android.app.DatePickerDialog
 import android.os.Bundle

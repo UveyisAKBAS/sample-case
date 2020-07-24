@@ -40,7 +40,7 @@
 
     <dialog
         android:id="@+id/dialog_date_picker"
-        android:name="com.example.samplecase.ui.DatePickerFragment"
+        android:name="com.example.samplecase.ui.datepicker.DatePickerFragment"
         android:label="dialog_date_picker">
 
     </dialog>
