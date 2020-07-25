@@ -1,14 +1,10 @@
 package com.example.samplecase.ui.report
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.samplecase.data.ReportRemoteDataSource
-import com.example.samplecase.data.model.ReportResponse
 import com.example.samplecase.data.net.ResponseCallback
 import com.example.samplecase.domain.report.model.Report
-import retrofit2.Call
-import retrofit2.Response
 
 class ReportListViewModel : ViewModel() {
 
