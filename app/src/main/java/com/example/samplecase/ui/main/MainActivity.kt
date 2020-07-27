@@ -1,7 +1,7 @@
 package com.example.samplecase.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.samplecase.R
 
 class MainActivity : AppCompatActivity() {

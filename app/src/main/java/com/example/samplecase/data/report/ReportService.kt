@@ -1,6 +1,6 @@
-package com.example.samplecase.data.net
+package com.example.samplecase.data.report
 
-import com.example.samplecase.data.model.ReportResponse
+import com.example.samplecase.data.report.model.ReportResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -8,7 +8,7 @@ import retrofit2.http.Query
 interface ReportService {
 
     @GET("everything?q=football&sortBy=popularity&apiKey=ae68088e70d04639b4950bdc9d546924")
-    fun getAllReports(@Query("from") startDate: String) : Call<ReportResponse>
+    fun getAllReports(@Query("from") startDate: String): Call<ReportResponse>
 }
 
 

@@ -31,11 +31,9 @@ class ReportDetailsFragment : Fragment() {
     }
 
     private fun initViews() {
-        args.argumentReportUrl?.url.let {reportUrl ->
-            if (reportUrl != null) {
-                webViewReportDescription.loadUrl(reportUrl)
-            }
 
+        args.argumentReportItem?.url?.let {
+            webViewReportDescription.loadUrl(it)
         }
 
     }

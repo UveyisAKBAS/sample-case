@@ -30,9 +30,9 @@
         tools:layout="@layout/fragment_report_details">
 
         <argument
-            android:name="argumentReportUrl"
+            android:name="argumentReportItem"
             android:defaultValue="@null"
-            app:argType="com.example.samplecase.domain.report.model.Report"
+            app:argType="com.example.samplecase.domain.report.model.ReportItem"
             app:nullable="true" />
 
     </fragment>

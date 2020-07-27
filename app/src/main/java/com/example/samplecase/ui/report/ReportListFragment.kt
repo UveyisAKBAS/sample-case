@@ -61,7 +61,7 @@ class ReportListFragment : Fragment() {
     private fun observeEvents() {
 
         viewModel.reportList.observe(viewLifecycleOwner, Observer {
-            reportListRecyclerAdapter.assignReports(it.toList())
+            reportListRecyclerAdapter.setItems(it.toList())
         })
     }
 }

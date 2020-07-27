@@ -1,4 +1,4 @@
-package com.example.samplecase.data.net
+package com.example.samplecase.net
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

@@ -1,16 +1,14 @@
 package com.example.samplecase.domain.report.model
 
+import com.example.samplecase.domain.base.model.BaseItem
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Report(
-    val source : Source?,
-    val author: String?,
+data class ReportItem(
     val title: String?,
     val description: String?,
     val url: String?,
-    val urlToImage: String?,
-    val publishedAt: String?,
-    val content: String?
-
+    val urlToImage: String?
 ) : BaseItem()
+
+

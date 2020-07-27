@@ -1,11 +1,10 @@
-package com.example.samplecase.data
+package com.example.samplecase.data.report
 
-import com.example.samplecase.data.mapper.ReportMapper
-import com.example.samplecase.data.model.ReportResponse
-import com.example.samplecase.data.net.ReportService
-import com.example.samplecase.data.net.ResponseCallback
-import com.example.samplecase.data.net.ServiceProvider
-import com.example.samplecase.domain.report.model.Report
+import com.example.samplecase.data.report.mapper.ReportMapper
+import com.example.samplecase.data.report.model.ReportResponse
+import com.example.samplecase.domain.report.model.ReportItem
+import com.example.samplecase.net.ResponseCallback
+import com.example.samplecase.net.ServiceProvider
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,7 +15,7 @@ object ReportRemoteDataSource {
         ServiceProvider.provideService(ReportService::class.java)
     }
 
-    fun getAllReports(startDate: String, callback: ResponseCallback<List<Report>>) {
+    fun getAllReports(startDate: String, callback: ResponseCallback<List<ReportItem>>) {
         reportService.getAllReports(startDate).enqueue(object : Callback<ReportResponse> {
             override fun onFailure(call: Call<ReportResponse>, t: Throwable) {
                 callback.onError(t)
@@ -26,10 +25,13 @@ object ReportRemoteDataSource {
                 call: Call<ReportResponse>,
                 response: Response<ReportResponse>
             ) {
-                //callback.onResponse(response.body()!!)
-                ReportMapper.mapToReport(response.body())?.let {
-                    callback.onResponse(it)
+
+                response.body()?.let { reportResponse ->
+                    ReportMapper.map(reportResponse).let {
+                        callback.onResponse(it)
+                    }
                 }
+
             }
 
         })
