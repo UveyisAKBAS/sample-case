@@ -2,9 +2,10 @@ package com.example.samplecase.ui.report
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.samplecase.data.report.ReportRemoteDataSource
 import com.example.samplecase.domain.report.model.ReportItem
-import com.example.samplecase.net.ResponseCallback
+import kotlinx.coroutines.launch
 
 class ReportListViewModel : ViewModel() {
 
@@ -12,22 +13,12 @@ class ReportListViewModel : ViewModel() {
 
     fun getReports(startDate: String) {
 
-        ReportRemoteDataSource.getAllReports(
-            startDate,
-            object : ResponseCallback<List<ReportItem>> {
+        viewModelScope.launch {
 
-                override fun onError(error: Throwable) {
-                }
-
-                override fun onResponse(response: List<ReportItem>?) {
-                    reportList.value = response
-                }
-
-
-            })
+            val response = ReportRemoteDataSource.getAllReports(startDate)
+            reportList.value = response
+        }
     }
-
-
 }
 
 

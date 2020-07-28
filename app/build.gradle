@@ -68,5 +68,9 @@ dependencies {
     // CardView Component
     implementation "com.android.support:cardview-v7:$cardview_version"
 
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_core_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_core_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.0-alpha06"
 
 }
