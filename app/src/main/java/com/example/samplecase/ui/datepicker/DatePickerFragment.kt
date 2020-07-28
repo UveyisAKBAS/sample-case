@@ -1,11 +1,9 @@
 package com.example.samplecase.ui.datepicker
 
-import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.example.samplecase.R
@@ -14,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_date_picker.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
+class DatePickerFragment : DialogFragment() {
 
     private val viewModel: ReportListViewModel by activityViewModels()
 
@@ -55,10 +53,4 @@ class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener 
 
         return dateFormat.format(calendar.time)
     }
-
-
-    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-
-    }
-
 }

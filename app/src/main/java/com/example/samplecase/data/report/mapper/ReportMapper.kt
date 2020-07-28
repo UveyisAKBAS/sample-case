@@ -6,7 +6,6 @@ import com.example.samplecase.domain.report.model.ReportItem
 
 object ReportMapper : BaseMapper<ReportResponse, List<ReportItem>> {
 
-
     override suspend fun map(response: ReportResponse): List<ReportItem>? {
         return response.reports?.map {
             ReportItem(
@@ -17,5 +16,4 @@ object ReportMapper : BaseMapper<ReportResponse, List<ReportItem>> {
             )
         }
     }
-
 }

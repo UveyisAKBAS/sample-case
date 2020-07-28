@@ -22,9 +22,8 @@ class ReportListRecyclerAdapter : BaseRecyclerAdapter<ReportItem>() {
                 .inflate(R.layout.recycler_item_report, parent, false)
         )
     }
-
-
 }
+
 
 class ReportViewHolder(itemView: View) : BaseViewHolder<ReportItem>(itemView) {
 
@@ -38,6 +37,5 @@ class ReportViewHolder(itemView: View) : BaseViewHolder<ReportItem>(itemView) {
         textViewReportTitle?.text = item.title
         textViewReportDescription?.text = item.description
     }
-
 }
 
