@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.samplecase.data.report.ReportRemoteDataSource
 import com.example.samplecase.domain.report.model.ReportItem
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 class ReportListViewModel : ViewModel() {
@@ -15,8 +16,14 @@ class ReportListViewModel : ViewModel() {
 
         viewModelScope.launch {
 
-            val response = ReportRemoteDataSource.getAllReports(startDate)
-            reportList.value = response
+            try {
+                if (isActive) {
+                    val response = ReportRemoteDataSource.getAllReports(startDate)
+                    reportList.value = response
+                }
+            } catch (e: Exception) {
+                reportList.value = null
+            }
         }
     }
 }
