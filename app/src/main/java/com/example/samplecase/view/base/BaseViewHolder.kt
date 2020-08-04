@@ -2,9 +2,11 @@ package com.example.samplecase.view.base
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.example.samplecase.databinding.RecyclerItemReportBinding
 import kotlinx.android.extensions.LayoutContainer
 
-abstract class BaseViewHolder<T>(itemView: View) : RecyclerView.ViewHolder(itemView),
+abstract class BaseViewHolder<T>(itemBinding: RecyclerItemReportBinding) :
+    RecyclerView.ViewHolder(itemBinding.root),
     View.OnClickListener, LayoutContainer {
 
     override val containerView: View?

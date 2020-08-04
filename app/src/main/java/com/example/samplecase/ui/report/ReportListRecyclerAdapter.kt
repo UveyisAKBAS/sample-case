@@ -1,14 +1,11 @@
 package com.example.samplecase.ui.report
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import com.example.samplecase.R
+import com.example.samplecase.databinding.RecyclerItemReportBinding
 import com.example.samplecase.domain.report.model.ReportItem
 import com.example.samplecase.view.base.BaseRecyclerAdapter
 import com.example.samplecase.view.base.BaseViewHolder
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.recycler_item_report.*
 
 class ReportListRecyclerAdapter : BaseRecyclerAdapter<ReportItem>() {
 
@@ -17,25 +14,18 @@ class ReportListRecyclerAdapter : BaseRecyclerAdapter<ReportItem>() {
     }
 
     override fun createViewHolder(parent: ViewGroup): BaseViewHolder<ReportItem> {
-        return ReportViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.recycler_item_report, parent, false)
-        )
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = RecyclerItemReportBinding.inflate(inflater)
+        return ReportViewHolder(binding)
     }
 }
 
 
-class ReportViewHolder(itemView: View) : BaseViewHolder<ReportItem>(itemView) {
+class ReportViewHolder(private val reportItemBinding: RecyclerItemReportBinding) :
+    BaseViewHolder<ReportItem>(reportItemBinding) {
 
     override fun bind(item: ReportItem) {
-
-        Picasso.get()
-            .load(item.urlToImage)
-            .placeholder(R.drawable.ic_launcher_background)
-            .error(R.drawable.ic_launcher_foreground)
-            .into(imageViewReportImage)
-        textViewReportTitle?.text = item.title
-        textViewReportDescription?.text = item.description
+        reportItemBinding.reportItem = item
+        reportItemBinding.executePendingBindings()
     }
 }
-

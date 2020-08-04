@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.samplecase.R
+import com.example.samplecase.databinding.FragmentReportListBinding
 import kotlinx.android.synthetic.main.fragment_report_list.*
 
 class ReportListFragment : Fragment() {
@@ -20,12 +22,16 @@ class ReportListFragment : Fragment() {
         ReportListRecyclerAdapter()
     }
 
+    lateinit var binding: FragmentReportListBinding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_report_list, container, false)
+
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_report_list, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,14 +48,12 @@ class ReportListFragment : Fragment() {
 
         viewModel.getReports("2020-07-22")
 
-        recyclerViewReportList.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = reportListRecyclerAdapter.apply {
-                setItemClickListener {
-                    findNavController().navigate(
-                        ReportListFragmentDirections.actionReportListToReportDetails(it)
-                    )
-                }
+        binding.layoutManager = LinearLayoutManager(context)
+        binding.adapter = reportListRecyclerAdapter.apply {
+            setItemClickListener {
+                findNavController().navigate(
+                    ReportListFragmentDirections.actionReportListToReportDetails(it)
+                )
             }
         }
 
