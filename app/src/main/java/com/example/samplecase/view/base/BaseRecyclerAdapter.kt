@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 abstract class BaseRecyclerAdapter<T> : RecyclerView.Adapter<BaseViewHolder<T>>() {
 
-    var itemList: List<T> = ArrayList()
+    private var itemList: List<T> = ArrayList()
     var onItemClick: ((T) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<T> {
@@ -30,8 +30,8 @@ abstract class BaseRecyclerAdapter<T> : RecyclerView.Adapter<BaseViewHolder<T>>(
         this.onItemClick = onItemClick
     }
 
-    fun setItems(itemList: List<T>) {
-        this.itemList = itemList
+    fun setItems(itemList: List<T>?) {
+        this.itemList = itemList.orEmpty()
         notifyDataSetChanged()
     }
 

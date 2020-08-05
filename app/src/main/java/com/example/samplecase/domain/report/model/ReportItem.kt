@@ -10,5 +10,3 @@ data class ReportItem(
     val url: String?,
     val urlToImage: String?
 ) : BaseItem()
-
-

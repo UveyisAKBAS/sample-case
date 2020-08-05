@@ -9,5 +9,3 @@ interface ReportService {
     @GET("everything?q=football&sortBy=popularity&apiKey=ae68088e70d04639b4950bdc9d546924")
     suspend fun getAllReports(@Query("from") startDate: String): ReportResponse
 }
-
-
