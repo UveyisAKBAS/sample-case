@@ -21,6 +21,8 @@ class ReportListFragment : BaseMvvmFragment<ReportListViewModel, FragmentReportL
     override fun initViews() {
         viewModel.getReports("2020-07-22")
 
+        binding.reportViewModel = viewModel
+
         with(recyclerViewReportList) {
             layoutManager = LinearLayoutManager(context)
             adapter = reportListRecyclerAdapter.apply {
