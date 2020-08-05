@@ -1,56 +1,30 @@
 package com.example.samplecase.ui.datepicker
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.example.samplecase.R
+import com.example.samplecase.ui.base.BaseDialogFragment
 import com.example.samplecase.ui.report.ReportListViewModel
+import com.example.samplecase.util.DateUtil
 import kotlinx.android.synthetic.main.fragment_date_picker.*
-import java.text.SimpleDateFormat
-import java.util.*
 
-class DatePickerFragment : DialogFragment() {
+class DatePickerFragment : BaseDialogFragment() {
 
     private val viewModel: ReportListViewModel by activityViewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_date_picker, container, false)
-    }
+    override fun getLayoutId(): Int = R.layout.fragment_date_picker
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        initViews()
-    }
-
-    private fun initViews() {
-
+    override fun initViews() {
         buttonSelectDate.setOnClickListener {
-
             viewModel.getReports(getDate())
             dismiss()
         }
     }
 
     private fun getDate(): String {
-
-        val datePattern = "yyyy-MM-dd"
-        val dateFormat = SimpleDateFormat(datePattern, Locale.getDefault())
-
         val year = datePicker.year
         val month = datePicker.month
         val day = datePicker.dayOfMonth
 
-        val calendar = Calendar.getInstance()
-        calendar.set(year, month, day)
-
-        return dateFormat.format(calendar.time)
+        return DateUtil.getDate(day, month, year)
     }
 }
