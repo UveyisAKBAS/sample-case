@@ -20,5 +20,4 @@ data class Report(
     val publishedAt: String?,
     @SerializedName("content")
     val content: String?
-
 ) : BaseResponse()

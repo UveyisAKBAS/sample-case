@@ -12,7 +12,7 @@ class BaseViewHolder<T>(val itemBinding: ViewDataBinding) :
     override val containerView: View?
         get() = itemView
 
-    var onItemClick: ((Int) -> Unit)? = null
+    private var onItemClick: ((Int) -> Unit)? = null
 
     fun setItemClickListener(onItemClick: (Int) -> Unit) {
         this.onItemClick = onItemClick

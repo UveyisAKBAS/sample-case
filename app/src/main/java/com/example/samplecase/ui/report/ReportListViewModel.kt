@@ -27,5 +27,3 @@ class ReportListViewModel : ViewModel() {
         }
     }
 }
-
-

@@ -11,7 +11,6 @@ object ReportRemoteDataSource {
     }
 
     suspend fun getAllReports(startDate: String): List<ReportItem>? {
-
         val reportResponse = reportService.getAllReports(startDate)
         return ReportMapper.map(reportResponse)
     }
