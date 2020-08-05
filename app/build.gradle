@@ -43,7 +43,6 @@ android {
     }
 
 
-
 }
 
 dependencies {
@@ -82,5 +81,5 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.0-alpha06"
 
     // Kotlin Data Binding
-    kapt ("com.android.databinding:compiler:$gradle_version")
+    kapt("com.android.databinding:compiler:$gradle_version")
 }

@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class ReportListViewModel : ViewModel() {
 
-    internal val reportList = MutableLiveData<List<ReportItem>>()
+    val reportList = MutableLiveData<List<ReportItem>?>()
 
     fun getReports(startDate: String) {
 

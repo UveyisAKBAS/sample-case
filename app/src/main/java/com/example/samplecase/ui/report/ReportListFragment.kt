@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.library.baseAdapters.BR
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.samplecase.R
 import com.example.samplecase.databinding.FragmentReportListBinding
+import com.example.samplecase.domain.report.model.ReportItem
 import kotlinx.android.synthetic.main.fragment_report_list.*
 
 class ReportListFragment : Fragment() {
@@ -19,7 +20,7 @@ class ReportListFragment : Fragment() {
     private val viewModel: ReportListViewModel by activityViewModels()
 
     private val reportListRecyclerAdapter by lazy {
-        ReportListRecyclerAdapter()
+        ReportListRecyclerAdapter<ReportItem>(R.layout.recycler_item_report, BR.reportItem)
     }
 
     lateinit var binding: FragmentReportListBinding
@@ -31,6 +32,8 @@ class ReportListFragment : Fragment() {
     ): View {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_report_list, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+
         return binding.root
     }
 
@@ -39,8 +42,6 @@ class ReportListFragment : Fragment() {
 
         if (savedInstanceState == null)
             initViews()
-
-        observeEvents()
     }
 
 
@@ -48,8 +49,10 @@ class ReportListFragment : Fragment() {
 
         viewModel.getReports("2020-07-22")
 
-        binding.layoutManager = LinearLayoutManager(context)
-        binding.adapter = reportListRecyclerAdapter.apply {
+        binding.reportViewModel = viewModel
+
+        binding.recyclerViewReportList.layoutManager = LinearLayoutManager(context)
+        binding.recyclerViewReportList.adapter = reportListRecyclerAdapter.apply {
             setItemClickListener {
                 findNavController().navigate(
                     ReportListFragmentDirections.actionReportListToReportDetails(it)
@@ -60,12 +63,5 @@ class ReportListFragment : Fragment() {
         buttonDate.setOnClickListener() {
             findNavController().navigate(ReportListFragmentDirections.actionFragmentReportListToDialogDatePicker())
         }
-    }
-
-    private fun observeEvents() {
-
-        viewModel.reportList.observe(viewLifecycleOwner, Observer {
-            reportListRecyclerAdapter.setItems(it.toList())
-        })
     }
 }

@@ -1,11 +1,11 @@
 package com.example.samplecase.view.base
 
 import android.view.View
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.example.samplecase.databinding.RecyclerItemReportBinding
 import kotlinx.android.extensions.LayoutContainer
 
-abstract class BaseViewHolder<T>(itemBinding: RecyclerItemReportBinding) :
+class BaseViewHolder<T>(val itemBinding: ViewDataBinding) :
     RecyclerView.ViewHolder(itemBinding.root),
     View.OnClickListener, LayoutContainer {
 
@@ -13,8 +13,6 @@ abstract class BaseViewHolder<T>(itemBinding: RecyclerItemReportBinding) :
         get() = itemView
 
     var onItemClick: ((Int) -> Unit)? = null
-
-    abstract fun bind(item: T)
 
     fun setItemClickListener(onItemClick: (Int) -> Unit) {
         this.onItemClick = onItemClick

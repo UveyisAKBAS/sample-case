@@ -6,12 +6,8 @@
     <data>
 
         <variable
-            name="layoutManager"
-            type="androidx.recyclerview.widget.LinearLayoutManager" />
-
-        <variable
-            name="adapter"
-            type="com.example.samplecase.ui.report.ReportListRecyclerAdapter" />
+            name="reportViewModel"
+            type="com.example.samplecase.ui.report.ReportListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,8 +19,7 @@
             android:id="@+id/recyclerViewReportList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:adapter="@{adapter}"
-            app:layoutManager="@{layoutManager}"
+            app:items="@{reportViewModel.reportList}"
             tools:listitem="@layout/recycler_item_report" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

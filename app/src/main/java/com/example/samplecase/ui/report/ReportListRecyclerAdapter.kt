@@ -2,30 +2,23 @@ package com.example.samplecase.ui.report
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.example.samplecase.databinding.RecyclerItemReportBinding
-import com.example.samplecase.domain.report.model.ReportItem
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import com.example.samplecase.view.base.BaseRecyclerAdapter
 import com.example.samplecase.view.base.BaseViewHolder
 
-class ReportListRecyclerAdapter : BaseRecyclerAdapter<ReportItem>() {
+class ReportListRecyclerAdapter<T>(val layoutId: Int, val bindingItemId: Int) :
+    BaseRecyclerAdapter<T>() {
 
-    override fun onBindViewHolder(holder: BaseViewHolder<ReportItem>, position: Int) {
-        holder.bind(itemList.get(position))
+    override fun createViewHolder(parent: ViewGroup): BaseViewHolder<T> {
+
+        val binding: ViewDataBinding =
+            DataBindingUtil.inflate(LayoutInflater.from(parent.context), layoutId, parent, false)
+
+        return BaseViewHolder(binding)
     }
 
-    override fun createViewHolder(parent: ViewGroup): BaseViewHolder<ReportItem> {
-        val inflater = LayoutInflater.from(parent.context)
-        val binding = RecyclerItemReportBinding.inflate(inflater)
-        return ReportViewHolder(binding)
-    }
-}
-
-
-class ReportViewHolder(private val reportItemBinding: RecyclerItemReportBinding) :
-    BaseViewHolder<ReportItem>(reportItemBinding) {
-
-    override fun bind(item: ReportItem) {
-        reportItemBinding.reportItem = item
-        reportItemBinding.executePendingBindings()
+    override fun onBindViewHolder(holder: BaseViewHolder<T>, position: Int) {
+        holder.itemBinding.setVariable(bindingItemId, getItem(position))
     }
 }
