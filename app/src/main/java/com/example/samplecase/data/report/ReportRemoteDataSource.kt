@@ -2,16 +2,16 @@ package com.example.samplecase.data.report
 
 import com.example.samplecase.data.report.mapper.ReportMapper
 import com.example.samplecase.domain.report.model.ReportItem
-import com.example.samplecase.net.ServiceProvider
+import javax.inject.Inject
+import javax.inject.Singleton
 
-object ReportRemoteDataSource {
-
-    private val reportService: ReportService by lazy {
-        ServiceProvider.provideService(ReportService::class.java)
-    }
+@Singleton
+class ReportRemoteDataSource @Inject constructor(
+    private val reportService: ReportService, private val reportMapper: ReportMapper
+) {
 
     suspend fun getAllReports(startDate: String): List<ReportItem>? {
         val reportResponse = reportService.getAllReports(startDate)
-        return ReportMapper.map(reportResponse)
+        return reportMapper.map(reportResponse)
     }
 }

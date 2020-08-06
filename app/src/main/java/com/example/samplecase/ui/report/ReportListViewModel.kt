@@ -1,5 +1,6 @@
 package com.example.samplecase.ui.report
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,7 +9,8 @@ import com.example.samplecase.domain.report.model.ReportItem
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
-class ReportListViewModel : ViewModel() {
+class ReportListViewModel @ViewModelInject constructor(private val reportRemoteDataSource: ReportRemoteDataSource) :
+    ViewModel() {
 
     val reportList = MutableLiveData<List<ReportItem>?>()
 
@@ -18,7 +20,7 @@ class ReportListViewModel : ViewModel() {
 
             try {
                 if (isActive) {
-                    val response = ReportRemoteDataSource.getAllReports(startDate)
+                    val response = reportRemoteDataSource.getAllReports(startDate)
                     reportList.value = response
                 }
             } catch (e: Exception) {

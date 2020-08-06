@@ -2,9 +2,13 @@ package com.example.samplecase.util
 
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
+import javax.inject.Singleton
 
-object DateUtil {
-    const val DATE_PATTERN = "yyyy-MM-dd"
+@Singleton
+class DateUtil @Inject constructor(){
+
+    private val DATE_PATTERN = "yyyy-MM-dd"
 
     fun getDate(day: Int, month: Int, year: Int): String {
         val dateFormat = SimpleDateFormat(DATE_PATTERN, Locale.getDefault())
