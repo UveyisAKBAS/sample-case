@@ -3,10 +3,8 @@ package com.example.samplecase.util
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class DateUtil @Inject constructor(){
+class DateUtil{
 
     private val DATE_PATTERN = "yyyy-MM-dd"
 

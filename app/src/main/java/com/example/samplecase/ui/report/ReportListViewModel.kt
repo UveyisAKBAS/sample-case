@@ -8,8 +8,9 @@ import com.example.samplecase.data.report.ReportRemoteDataSource
 import com.example.samplecase.domain.report.model.ReportItem
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ReportListViewModel @ViewModelInject constructor(private val reportRemoteDataSource: ReportRemoteDataSource) :
+class ReportListViewModel @Inject constructor(private val reportRemoteDataSource: ReportRemoteDataSource) :
     ViewModel() {
 
     val reportList = MutableLiveData<List<ReportItem>?>()
