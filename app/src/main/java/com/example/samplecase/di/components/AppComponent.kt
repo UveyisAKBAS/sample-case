@@ -4,6 +4,8 @@ import com.example.samplecase.App
 import com.example.samplecase.di.modules.*
 import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjector
+import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
@@ -14,10 +16,11 @@ import javax.inject.Singleton
         DataModule::class,
         ActivityBuilderModule::class,
         FragmentBuilderModule::class,
-        ViewModelBuilderModule::class
+        ViewModelBuilderModule::class,
+        AndroidSupportInjectionModule::class
     ]
 )
-interface AppComponent {
+interface AppComponent : AndroidInjector<App> {
 
     @Component.Factory
     interface Factory {

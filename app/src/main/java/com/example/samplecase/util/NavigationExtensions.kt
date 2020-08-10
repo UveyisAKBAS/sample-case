@@ -6,7 +6,6 @@ import androidx.navigation.fragment.findNavController
 
 fun <T> Fragment.setResult(key: String, result: T) {
     findNavController().previousBackStackEntry?.savedStateHandle?.set(key, result)
-    finish()
 }
 
 fun Fragment.finish() {

@@ -23,6 +23,6 @@ fun String.toDate(): Date? {
     return SimpleDateFormat(DateUtil.DATE_PATTERN, Locale.getDefault()).parse(this)
 }
 
-fun Date.toString(): String {
+fun Date.convertToString(): String {
     return SimpleDateFormat(DateUtil.DATE_PATTERN, Locale.getDefault()).format(this)
 }
