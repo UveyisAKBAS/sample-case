@@ -10,7 +10,7 @@ class App : Application() {
         initializeComponent()
     }
 
-    fun initializeComponent(): AppComponent {
-        return DaggerAppComponent.factory().create(applicationContext)
+    private fun initializeComponent(): AppComponent {
+        return DaggerAppComponent.factory().create(this)
     }
 }

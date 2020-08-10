@@ -39,14 +39,6 @@ class ViewModelFactory @Inject constructor(private val creators: @JvmSuppressWil
     }
 }
 
-@Module
-abstract class ViewModelBuilderModule {
-    @Binds
-    abstract fun bindViewModelFactory(
-        factory: ViewModelFactory
-    ): ViewModelProvider.Factory
-}
-
 @Target(
     AnnotationTarget.FUNCTION,
     AnnotationTarget.PROPERTY_GETTER,

@@ -4,9 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.DialogFragment
+import com.example.samplecase.di.ViewModelFactory
+import dagger.android.support.DaggerDialogFragment
+import javax.inject.Inject
 
-abstract class BaseDialogFragment : DialogFragment() {
+abstract class BaseDialogFragment : DaggerDialogFragment() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater,
