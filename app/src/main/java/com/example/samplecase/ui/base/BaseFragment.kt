@@ -4,9 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import com.example.samplecase.di.ViewModelFactory
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment : DaggerFragment() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,9 +26,13 @@ abstract class BaseFragment : Fragment() {
 
         if (savedInstanceState == null)
             initViews()
+
+        observeEvents()
     }
 
     protected abstract fun getLayoutId(): Int
 
     protected abstract fun initViews()
+
+    protected open fun observeEvents() = Unit
 }
