@@ -8,7 +8,8 @@ class ReportMapper : BaseMapper<ReportResponse, List<ReportItem>> {
 
     override suspend fun map(response: ReportResponse): List<ReportItem>? {
         return response.reports?.map {
-            ReportItem(title = it.title,
+            ReportItem(
+                title = it.title,
                 description = it.description,
                 url = it.url,
                 urlToImage = it.urlToImage

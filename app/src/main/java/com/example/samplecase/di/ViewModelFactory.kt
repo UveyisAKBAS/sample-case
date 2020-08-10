@@ -2,7 +2,6 @@ package com.example.samplecase.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.samplecase.di.scopes.ViewModelScope
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -48,7 +47,8 @@ abstract class ViewModelBuilderModule {
     ): ViewModelProvider.Factory
 }
 
-@Target(AnnotationTarget.FUNCTION,
+@Target(
+    AnnotationTarget.FUNCTION,
     AnnotationTarget.PROPERTY_GETTER,
     AnnotationTarget.PROPERTY_SETTER
 )

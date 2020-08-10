@@ -21,9 +21,13 @@ abstract class BaseDialogFragment : DialogFragment() {
 
         if (savedInstanceState == null)
             initViews()
+
+        observeEvents()
     }
 
     protected abstract fun getLayoutId(): Int
 
     protected abstract fun initViews()
+
+    protected open fun observeEvents() = Unit
 }

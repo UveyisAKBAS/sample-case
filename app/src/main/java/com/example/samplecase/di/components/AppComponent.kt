@@ -19,10 +19,10 @@ interface AppComponent {
     }
 
     fun addReportComponent(): ReportComponent.Factory
-    fun addUtilComponent(): UtilComponent.Factory
     fun addReportListRecyclerAdapterComponent(): ReportListRecyclerAdapterComponent.Factory
 }
 
-@Module(subcomponents = [ReportComponent::class, UtilComponent::class, ReportListRecyclerAdapterComponent::class]
+@Module(
+    subcomponents = [ReportComponent::class, ReportListRecyclerAdapterComponent::class]
 )
 object SubComponentsModule
