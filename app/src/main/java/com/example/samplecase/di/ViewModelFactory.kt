@@ -2,9 +2,7 @@ package com.example.samplecase.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import dagger.Binds
 import dagger.MapKey
-import dagger.Module
 import javax.inject.Inject
 import javax.inject.Provider
 import kotlin.reflect.KClass
