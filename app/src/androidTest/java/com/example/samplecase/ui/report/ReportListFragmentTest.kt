@@ -4,6 +4,7 @@ import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.navigation.Navigation
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
@@ -12,17 +13,21 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.samplecase.R
 import com.example.samplecase.domain.report.model.ReportItem
 import com.example.samplecase.ui.rules.NavigationRule
+import com.example.samplecase.util.ReportIdlingResource
 import com.example.samplecase.view.base.BaseViewHolder
 import com.google.common.truth.Truth.assertThat
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class ReportListFragmentTest {
+class ReportListFragmentTest : FragmentScenario.FragmentAction<ReportListFragment> {
 
-    lateinit var reportListScenario: FragmentScenario<ReportListFragment>
+    private lateinit var reportListScenario: FragmentScenario<ReportListFragment>
+
+    private var reportIdlingResource: ReportIdlingResource? = null
 
     @get: Rule
     var navigationRule = NavigationRule(R.navigation.navigation_graph, R.id.fragment_report_list)
@@ -39,10 +44,9 @@ class ReportListFragmentTest {
                         )
                     }
                 }
+                perform(fragment)
             }
         }
-        //TODO change Thread.Sleep with idling resources
-        Thread.sleep(3000)
     }
 
     @Test
@@ -68,5 +72,17 @@ class ReportListFragmentTest {
     fun testNavigationFromReportListFragmentToDatePickerFragment() {
         onView(withId(R.id.buttonDate)).perform(ViewActions.click())
         assertThat(navigationRule.navController?.currentDestination?.id).isEqualTo(R.id.dialog_date_picker)
+    }
+
+    @After
+    fun unregisterIdlingResource(){
+        if (reportIdlingResource != null){
+            IdlingRegistry.getInstance().unregister(reportIdlingResource);
+        }
+    }
+
+    override fun perform(fragment: ReportListFragment) {
+        reportIdlingResource = fragment.getIdlingResource()
+        IdlingRegistry.getInstance().register(reportIdlingResource);
     }
 }
