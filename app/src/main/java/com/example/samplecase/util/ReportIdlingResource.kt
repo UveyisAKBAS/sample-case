@@ -19,7 +19,7 @@ class ReportIdlingResource : IdlingResource {
 
     fun setIsIdle(isIdle: Boolean) {
         this.isIdle.set(isIdle)
-        if (isIdle && callback != null){
+        if (isIdle && callback != null) {
             callback!!.onTransitionToIdle()
         }
     }
