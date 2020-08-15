@@ -2,6 +2,7 @@ package com.example.samplecase
 
 import com.example.samplecase.ui.datepicker.DatePickerFragmentTest
 import com.example.samplecase.ui.main.MainActivityTest
+import com.example.samplecase.ui.navigation.NavigationTest
 import com.example.samplecase.ui.report.ReportListFragmentTest
 import org.junit.runner.RunWith
 import org.junit.runners.Suite
@@ -10,6 +11,7 @@ import org.junit.runners.Suite
 @Suite.SuiteClasses(
     DatePickerFragmentTest::class,
     ReportListFragmentTest::class,
-    MainActivityTest::class
+    MainActivityTest::class,
+    NavigationTest::class
 )
 class TestSuite
