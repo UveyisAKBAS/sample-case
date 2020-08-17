@@ -5,7 +5,6 @@ import androidx.navigation.testing.TestNavHostController
 import androidx.test.core.app.ApplicationProvider
 import org.junit.rules.ExternalResource
 
-
 class NavigationRule(
     private val navigationGraphId: Int,
     private val currentDestinationId: Int
