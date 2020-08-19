@@ -1,4 +1,4 @@
-package com.example.samplecase.ui
+package com.example.samplecase.util
 
 import androidx.arch.core.executor.ArchTaskExecutor
 import androidx.arch.core.executor.TaskExecutor

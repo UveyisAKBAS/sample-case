@@ -2,7 +2,7 @@ package com.example.samplecase.ui.report
 
 import com.example.samplecase.domain.report.ReportDataSource
 import com.example.samplecase.mocks.MockReportItemFactory
-import com.example.samplecase.ui.InstantExecutorExtension
+import com.example.samplecase.util.InstantExecutorExtension
 import com.example.samplecase.util.ReportIdlingResource
 import com.example.samplecase.util.toDate
 import com.google.common.truth.Truth.assertThat

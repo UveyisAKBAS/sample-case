@@ -64,7 +64,10 @@ class ReportListFragmentTest : FragmentScenario.FragmentAction<ReportListFragmen
             RecyclerViewActions.scrollToPosition<BaseViewHolder<ReportItem>>(TEST_ITEM_POSITION)
         )
         onView(withId(R.id.recyclerViewReportList)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<BaseViewHolder<ReportItem>>(TEST_ITEM_POSITION, click())
+            RecyclerViewActions.actionOnItemAtPosition<BaseViewHolder<ReportItem>>(
+                TEST_ITEM_POSITION,
+                click()
+            )
         )
         assertThat(navigationRule.navController?.currentDestination?.id).isEqualTo(R.id.fragment_report_details)
     }

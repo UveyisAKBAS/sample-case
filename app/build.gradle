@@ -106,7 +106,7 @@ dependencies {
     // Kotlin Data Binding
     kapt "com.android.databinding:compiler:$gradle_version"
 
-    // Dagger Hilt
+    // Dagger
     implementation "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
