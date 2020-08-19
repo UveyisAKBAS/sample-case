@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class ReportEntity(
-    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "report_id") val reportId: Int,
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "report_id") val id: Long? = null,
     @ColumnInfo(name = "author") val author: String?,
     @ColumnInfo(name = "title") val title: String?,
     @ColumnInfo(name = "description") val description: String?,

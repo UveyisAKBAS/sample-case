@@ -47,7 +47,7 @@ class ReportRemoteDataSourceTest {
     @Test
     fun `getAllReports Should Return Correct ReportItemList For A Given ReportResponse`() =
         runBlocking {
-            val resultReportItemList = reportRemoteDataSource.getAllReports(START_DATE.toDate()!!)
+            val resultReportItemList = reportRemoteDataSource.fetchReports(START_DATE.toDate()!!)
             resultReportItemList!!.let {
                 assertThat(it[0].title).isEqualTo(reportResponse.reports!![0].title)
                 assertThat(it[1].title).isEqualTo(reportResponse.reports!![1].title)

@@ -1,8 +1,11 @@
 package com.example.samplecase.di.modules
 
+import com.example.samplecase.data.report.local.LocalDataSource
+import com.example.samplecase.data.report.local.ReportLocalDataSource
+import com.example.samplecase.data.report.local.mapper.ReportEntityMapper
+import com.example.samplecase.data.report.remote.RemoteDataSource
 import com.example.samplecase.data.report.remote.ReportRemoteDataSource
 import com.example.samplecase.data.report.remote.mapper.ReportMapper
-import com.example.samplecase.domain.report.ReportDataSource
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -18,9 +21,19 @@ abstract class DataModule {
         fun provideReportMapper(): ReportMapper {
             return ReportMapper()
         }
+
+        @Singleton
+        @Provides
+        fun provideReportEntityMapper(): ReportEntityMapper {
+            return ReportEntityMapper()
+        }
     }
 
     @Binds
     @Singleton
-    abstract fun provideReportRemoteDataSource(reportRemoteDataSource: ReportRemoteDataSource): ReportDataSource
+    abstract fun provideReportRemoteDataSource(reportRemoteDataSource: ReportRemoteDataSource): RemoteDataSource
+
+    @Binds
+    @Singleton
+    abstract fun provideReportLocalDataSource(reportLocalDataSource: ReportLocalDataSource): LocalDataSource
 }

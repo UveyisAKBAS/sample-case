@@ -10,11 +10,17 @@ import com.example.samplecase.data.report.local.entity.ReportEntity
 interface ReportDao {
 
     @Query("SELECT * FROM ReportEntity")
-    fun getAllReports() : List<ReportEntity>
+    fun loadAll(): List<ReportEntity>
+
+    @Query("SELECT COUNT(*) FROM ReportEntity")
+    fun getRowCount(): Int
 
     @Insert
-    fun insertReportEntity(reportEntity: ReportEntity)
+    fun insertAll(reportEntityList: List<ReportEntity>)
 
     @Delete
-    fun deleteReportEntity(reportEntity: ReportEntity)
+    fun delete(reportEntity: ReportEntity)
+
+    @Query("DELETE FROM ReportEntity")
+    fun deleteAll()
 }

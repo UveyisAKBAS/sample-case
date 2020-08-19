@@ -12,4 +12,8 @@ class ReportUseCase @Inject constructor(
     suspend fun getAllReports(startDate: Date): List<ReportItem>? {
         return repository.getAllReports(startDate)
     }
+
+    suspend fun updateReports(startDate: Date): List<ReportItem>? {
+        return repository.updateReports(startDate)
+    }
 }

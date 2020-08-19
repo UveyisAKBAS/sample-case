@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.example.samplecase.data.report.local.dao.ReportDao
 import com.example.samplecase.data.report.local.entity.ReportEntity
 
-@Database(entities = [ReportEntity::class], version = 1, exportSchema = false)
-abstract class ReportDatabase : RoomDatabase() {
+@Database(entities = [ReportEntity::class], version = 1)
+abstract class AppDatabase : RoomDatabase() {
     abstract fun reportDao(): ReportDao
 }
