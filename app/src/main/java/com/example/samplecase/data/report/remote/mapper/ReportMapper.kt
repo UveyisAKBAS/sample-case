@@ -1,7 +1,7 @@
-package com.example.samplecase.data.report.mapper
+package com.example.samplecase.data.report.remote.mapper
 
 import com.example.samplecase.data.base.mapper.BaseMapper
-import com.example.samplecase.data.report.model.ReportResponse
+import com.example.samplecase.data.report.remote.model.ReportResponse
 import com.example.samplecase.domain.report.model.ReportItem
 
 class ReportMapper : BaseMapper<ReportResponse, List<ReportItem>> {

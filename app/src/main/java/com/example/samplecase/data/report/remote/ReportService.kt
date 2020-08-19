@@ -1,6 +1,6 @@
-package com.example.samplecase.data.report
+package com.example.samplecase.data.report.remote
 
-import com.example.samplecase.data.report.model.ReportResponse
+import com.example.samplecase.data.report.remote.model.ReportResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

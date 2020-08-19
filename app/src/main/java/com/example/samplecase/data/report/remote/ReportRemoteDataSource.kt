@@ -1,6 +1,6 @@
-package com.example.samplecase.data.report
+package com.example.samplecase.data.report.remote
 
-import com.example.samplecase.data.report.mapper.ReportMapper
+import com.example.samplecase.data.report.remote.mapper.ReportMapper
 import com.example.samplecase.domain.report.ReportDataSource
 import com.example.samplecase.domain.report.model.ReportItem
 import com.example.samplecase.util.convertToString

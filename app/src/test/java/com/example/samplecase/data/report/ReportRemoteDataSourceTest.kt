@@ -1,7 +1,9 @@
 package com.example.samplecase.data.report
 
-import com.example.samplecase.data.report.mapper.ReportMapper
-import com.example.samplecase.data.report.model.ReportResponse
+import com.example.samplecase.data.report.remote.ReportRemoteDataSource
+import com.example.samplecase.data.report.remote.ReportService
+import com.example.samplecase.data.report.remote.mapper.ReportMapper
+import com.example.samplecase.data.report.remote.model.ReportResponse
 import com.example.samplecase.domain.report.model.ReportItem
 import com.example.samplecase.mocks.MockReportItemFactory
 import com.example.samplecase.mocks.MockReportResponseFactory

@@ -1,8 +1,8 @@
 package com.example.samplecase.mocks
 
-import com.example.samplecase.data.report.model.Report
-import com.example.samplecase.data.report.model.ReportResponse
-import com.example.samplecase.data.report.model.Source
+import com.example.samplecase.data.report.remote.model.Report
+import com.example.samplecase.data.report.remote.model.ReportResponse
+import com.example.samplecase.data.report.remote.model.Source
 
 class MockReportResponseFactory {
 

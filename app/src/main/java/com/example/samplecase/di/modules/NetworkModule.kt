@@ -1,6 +1,6 @@
 package com.example.samplecase.di.modules
 
-import com.example.samplecase.data.report.ReportService
+import com.example.samplecase.data.report.remote.ReportService
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
