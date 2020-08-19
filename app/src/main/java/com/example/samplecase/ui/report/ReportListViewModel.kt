@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.samplecase.domain.report.ReportDataSource
 import com.example.samplecase.domain.report.model.ReportItem
+import com.example.samplecase.domain.report.usecase.ReportUseCase
 import com.example.samplecase.util.ReportIdlingResource
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
@@ -12,7 +13,7 @@ import java.util.*
 import javax.inject.Inject
 
 class ReportListViewModel @Inject constructor(
-    private val reportDataSource: ReportDataSource
+    private val useCase: ReportUseCase
 ) : ViewModel() {
 
     val reportList = MutableLiveData<List<ReportItem>?>()
@@ -25,7 +26,7 @@ class ReportListViewModel @Inject constructor(
 
             try {
                 if (isActive) {
-                    val response = reportDataSource.getAllReports(startDate)
+                    val response = useCase.getAllReports(startDate)
                     reportList.value = response
                 }
             } catch (e: Exception) {
