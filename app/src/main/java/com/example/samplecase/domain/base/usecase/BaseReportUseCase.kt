@@ -1,17 +1,17 @@
-package com.example.samplecase.ui.report
+package com.example.samplecase.domain.base.usecase
 
 import com.example.samplecase.domain.report.model.ReportItem
 import com.example.samplecase.util.ReportIdlingResource
 import kotlinx.coroutines.*
 import java.util.*
 
-object UseCaseExecutor {
+abstract class BaseReportUseCase : BaseUseCase() {
 
     fun execute(
         startDate: Date?,
         reportIdlingResource: ReportIdlingResource?,
-        callbackOne: suspend (Date) -> List<ReportItem>?,
-        callbackTwo: suspend (List<ReportItem>?) -> Unit
+        repositoryCallback: suspend (Date) -> List<ReportItem>?,
+        liveDataCallback: suspend (List<ReportItem>?) -> Unit
     ) {
         if (startDate == null) return
 
@@ -20,14 +20,14 @@ object UseCaseExecutor {
 
             try {
                 if (isActive) {
-                    val response = callbackOne(startDate)
+                    val response = repositoryCallback(startDate)
                     withContext(Dispatchers.Main) {
-                        callbackTwo(response)
+                        liveDataCallback(response)
                     }
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    callbackTwo(null)
+                    liveDataCallback(null)
                 }
             }
         }
