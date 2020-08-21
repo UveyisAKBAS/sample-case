@@ -54,7 +54,7 @@ class ReportListFragment : BaseMvvmFragment<ReportListViewModel, FragmentReportL
         super.observeEvents()
 
         onResult<Date>(DatePickerFragment.EXTRA_SELECTED_DATE) { date ->
-            viewModel.updateReports(date)
+            viewModel.updateReports(date, reportIdlingResource)
         }
     }
 
