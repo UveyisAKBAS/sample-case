@@ -1,7 +1,7 @@
-package com.example.samplecase.data
+package com.example.samplecase.data.report
 
 import com.example.samplecase.data.report.local.LocalDataSource
-import com.example.samplecase.data.report.local.entity.ReportEntity
+import com.example.samplecase.data.report.local.model.ReportEntity
 import com.example.samplecase.data.report.local.mapper.ReportEntityMapper
 import com.example.samplecase.data.report.remote.RemoteDataSource
 import com.example.samplecase.data.report.remote.mapper.ReportMapper
@@ -10,7 +10,7 @@ import com.example.samplecase.domain.report.model.ReportItem
 import java.util.*
 import javax.inject.Inject
 
-class Repository @Inject constructor(
+class ReportRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val reportItemMapper: ReportMapper,

@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.samplecase.data.report.local.entity.ReportEntity
+import com.example.samplecase.data.report.local.model.ReportEntity
 
 @Dao
 interface ReportDao {

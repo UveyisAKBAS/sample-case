@@ -1,4 +1,4 @@
-package com.example.samplecase.data.report.local.entity
+package com.example.samplecase.data.report.local.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

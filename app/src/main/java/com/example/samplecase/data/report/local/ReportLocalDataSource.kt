@@ -1,7 +1,7 @@
 package com.example.samplecase.data.report.local
 
 import com.example.samplecase.data.report.local.dao.ReportDao
-import com.example.samplecase.data.report.local.entity.ReportEntity
+import com.example.samplecase.data.report.local.model.ReportEntity
 import javax.inject.Inject
 
 class ReportLocalDataSource @Inject constructor(

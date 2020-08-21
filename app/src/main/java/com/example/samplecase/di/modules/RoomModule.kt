@@ -2,7 +2,7 @@ package com.example.samplecase.di.modules
 
 import androidx.room.Room
 import com.example.samplecase.App
-import com.example.samplecase.data.report.local.AppDatabase
+import com.example.samplecase.data.AppDatabase
 import com.example.samplecase.data.report.local.dao.ReportDao
 import dagger.Module
 import dagger.Provides

@@ -1,6 +1,6 @@
 package com.example.samplecase.data.report.local
 
-import com.example.samplecase.data.report.local.entity.ReportEntity
+import com.example.samplecase.data.report.local.model.ReportEntity
 import com.example.samplecase.domain.base.BaseDataSource
 
 interface LocalDataSource : BaseDataSource {
