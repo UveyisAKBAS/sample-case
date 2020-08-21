@@ -1,8 +1,8 @@
 package com.example.samplecase.data.report
 
 import com.example.samplecase.data.report.local.LocalDataSource
-import com.example.samplecase.data.report.local.model.ReportEntity
 import com.example.samplecase.data.report.local.mapper.ReportEntityMapper
+import com.example.samplecase.data.report.local.model.ReportEntity
 import com.example.samplecase.data.report.remote.RemoteDataSource
 import com.example.samplecase.data.report.remote.mapper.ReportMapper
 import com.example.samplecase.data.report.remote.model.ReportResponse
@@ -13,7 +13,7 @@ import javax.inject.Inject
 class ReportRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
-    private val reportItemMapper: ReportMapper,
+    private val reportMapper: ReportMapper,
     private val reportEntityMapper: ReportEntityMapper
 ) {
 
@@ -46,7 +46,7 @@ class ReportRepository @Inject constructor(
         reportEntityMapper.mapIntoReportEntity(reportResponse)?.let {
             insertAllReports(it)
         }
-        return reportItemMapper.map(reportResponse)
+        return reportMapper.map(reportResponse)
     }
 
     private suspend fun isReportTableHasData(): Boolean = localDataSource.getRowCount() != 0

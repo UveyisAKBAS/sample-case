@@ -3,8 +3,9 @@ package com.example.samplecase.util
 import androidx.test.espresso.IdlingResource
 import androidx.test.espresso.IdlingResource.ResourceCallback
 import java.util.concurrent.atomic.AtomicBoolean
+import javax.inject.Inject
 
-class ReportIdlingResource : IdlingResource {
+class ReportIdlingResource @Inject constructor() : IdlingResource {
 
     private var callback: ResourceCallback? = null
     private var isIdle = AtomicBoolean(true)

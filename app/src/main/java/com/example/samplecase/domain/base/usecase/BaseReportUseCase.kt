@@ -4,19 +4,22 @@ import com.example.samplecase.domain.report.model.ReportItem
 import com.example.samplecase.util.ReportIdlingResource
 import kotlinx.coroutines.*
 import java.util.*
+import javax.inject.Inject
 
 abstract class BaseReportUseCase : BaseUseCase() {
 
+    @Inject
+    lateinit var reportIdlingResource: ReportIdlingResource
+
     fun execute(
         startDate: Date?,
-        reportIdlingResource: ReportIdlingResource?,
         repositoryCallback: suspend (Date) -> List<ReportItem>?,
         liveDataCallback: suspend (List<ReportItem>?) -> Unit
     ) {
         if (startDate == null) return
 
         CoroutineScope(Dispatchers.IO).launch {
-            reportIdlingResource?.setIsIdle(false)
+            reportIdlingResource.setIsIdle(false)
 
             try {
                 if (isActive) {
@@ -32,6 +35,6 @@ abstract class BaseReportUseCase : BaseUseCase() {
             }
         }
 
-        reportIdlingResource?.setIsIdle(true)
+        reportIdlingResource.setIsIdle(true)
     }
 }
