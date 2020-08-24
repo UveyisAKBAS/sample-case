@@ -19,9 +19,11 @@
         <action
             android:id="@+id/action_fragment_report_list_to_dialog_date_picker"
             app:destination="@id/dialog_date_picker" />
+        <action
+            android:id="@+id/action_fragment_report_list_to_fragment_specific_demo"
+            app:destination="@id/fragment_specific_demo" />
 
     </fragment>
-
 
     <fragment
         android:id="@+id/fragment_report_details"
@@ -37,13 +39,14 @@
 
     </fragment>
 
-
     <dialog
         android:id="@+id/dialog_date_picker"
         android:name="com.example.samplecase.ui.datepicker.DatePickerFragment"
-        android:label="dialog_date_picker">
+        android:label="dialog_date_picker"/>
 
-    </dialog>
-
+    <fragment
+        android:id="@+id/fragment_specific_demo"
+        android:name="com.example.samplecase.ui.payment.PaymentFragment"
+        android:label="fragment_specific_demo"/>
 
 </navigation>

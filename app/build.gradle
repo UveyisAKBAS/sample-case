@@ -45,6 +45,18 @@ android {
     testOptions {
         unitTests.returnDefaultValues = true
     }
+
+    flavorDimensions "version"
+    productFlavors {
+        demo {
+            dimension "version"
+            applicationIdSuffix ".demo"
+        }
+        full {
+            dimension "version"
+            applicationIdSuffix ".full"
+        }
+    }
 }
 
 dependencies {

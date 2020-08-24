@@ -1,7 +1,7 @@
 package com.example.samplecase.data.report.mapper
 
-import com.example.samplecase.data.report.remote.model.ReportResponse
 import com.example.samplecase.data.report.remote.mapper.ReportMapper
+import com.example.samplecase.data.report.remote.model.ReportResponse
 import com.example.samplecase.mocks.MockReportResponseFactory
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.runBlocking

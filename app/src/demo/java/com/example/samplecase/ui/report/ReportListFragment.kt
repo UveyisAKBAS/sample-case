@@ -9,7 +9,7 @@ import com.example.samplecase.ui.base.BaseMvvmFragment
 import com.example.samplecase.ui.datepicker.DatePickerFragment
 import com.example.samplecase.util.onResult
 import com.example.samplecase.util.toDate
-import kotlinx.android.synthetic.main.fragment_report_list.*
+import kotlinx.android.synthetic.demo.fragment_report_list.*
 import java.util.*
 
 class ReportListFragment : BaseMvvmFragment<ReportListViewModel, FragmentReportListBinding>() {
@@ -41,6 +41,10 @@ class ReportListFragment : BaseMvvmFragment<ReportListViewModel, FragmentReportL
 
         buttonDate.setOnClickListener() {
             findNavController().navigate(ReportListFragmentDirections.actionFragmentReportListToDialogDatePicker())
+        }
+
+        buttonUpgrade.setOnClickListener() {
+            findNavController().navigate(ReportListFragmentDirections.actionFragmentReportListToFragmentSpecificDemo())
         }
     }
 

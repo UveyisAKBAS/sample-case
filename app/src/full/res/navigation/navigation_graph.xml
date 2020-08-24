@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/fragment_report_list">
+
+    <fragment
+        android:id="@+id/fragment_report_list"
+        android:name="com.example.samplecase.ui.report.ReportListFragment"
+        android:label="fragment_report_list"
+        tools:layout="@layout/fragment_report_list">
+
+        <action
+            android:id="@+id/action_report_list_to_report_details"
+            app:destination="@id/fragment_report_details" />
+
+        <action
+            android:id="@+id/action_fragment_report_list_to_dialog_date_picker"
+            app:destination="@id/dialog_date_picker" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_report_details"
+        android:name="com.example.samplecase.ui.detail.ReportDetailsFragment"
+        android:label="fragment_report_details"
+        tools:layout="@layout/fragment_report_details">
+
+        <argument
+            android:name="argumentReportItem"
+            android:defaultValue="@null"
+            app:argType="com.example.samplecase.domain.report.model.ReportItem"
+            app:nullable="true" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/dialog_date_picker"
+        android:name="com.example.samplecase.ui.datepicker.DatePickerFragment"
+        android:label="dialog_date_picker"/>
+
+</navigation>
