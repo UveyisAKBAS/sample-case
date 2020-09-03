@@ -19,3 +19,9 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-printusage removed-usage.txt
+-printconfiguration full-r8-config.txt
+
+-keep class * extends com.example.samplecase.domain.base.model.BaseItem {*;}
+-keep,allowobfuscation class * extends com.example.samplecase.data.base.model.BaseResponse {*;}
+-keep,allowobfuscation class com.example.samplecase.data.report.local.model.* {*;}

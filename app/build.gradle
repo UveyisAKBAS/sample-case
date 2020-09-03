@@ -6,6 +6,16 @@ apply plugin: 'kotlin-kapt'
 apply plugin: "de.mannodermaus.android-junit5"
 
 android {
+    /*
+    signingConfigs {
+        release {
+            storeFile file('path for key store\\keystoreName.jks')
+            storePassword 'store password'
+            keyAlias 'keyAlias'
+            keyPassword 'key password'
+        }
+    }
+    */
     compileSdkVersion 30
     buildToolsVersion "30.0.1"
 
@@ -20,7 +30,9 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
+            // signingConfig signingConfigs.release (unComment for signing)
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
