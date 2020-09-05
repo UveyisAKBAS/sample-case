@@ -2,14 +2,15 @@ package com.example.samplecase.data.report.local
 
 import com.example.samplecase.data.report.local.model.ReportEntity
 import com.example.samplecase.domain.base.BaseDataSource
+import io.reactivex.Maybe
 
 interface LocalDataSource : BaseDataSource {
 
-    suspend fun loadAllReports(): List<ReportEntity>
+    fun loadAllReports(): Maybe<List<ReportEntity>>
 
-    suspend fun insertAllReports(reportEntityList: List<ReportEntity>)
+    fun insertReport(reportEntityList: List<ReportEntity>)
 
-    suspend fun getRowCount(): Int
+    fun getRowCount(): Maybe<Int>
 
-    suspend fun deleteAll()
+    fun deleteAll()
 }

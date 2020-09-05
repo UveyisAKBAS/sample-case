@@ -2,11 +2,13 @@ package com.example.samplecase.data.report
 
 import com.example.samplecase.data.report.local.LocalDataSource
 import com.example.samplecase.data.report.local.mapper.ReportEntityMapper
-import com.example.samplecase.data.report.local.model.ReportEntity
 import com.example.samplecase.data.report.remote.RemoteDataSource
 import com.example.samplecase.data.report.remote.mapper.ReportMapper
 import com.example.samplecase.data.report.remote.model.ReportResponse
 import com.example.samplecase.domain.report.model.ReportItem
+import io.reactivex.Maybe
+import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 import java.util.*
 import javax.inject.Inject
 
@@ -17,37 +19,46 @@ class ReportRepository @Inject constructor(
     private val reportEntityMapper: ReportEntityMapper
 ) {
 
-    suspend fun getAllReports(startDate: Date): List<ReportItem>? {
-        return if (isReportTableHasData()) loadAllReports() else fetchAndSave(startDate)
+    fun getAllReports(startDate: Date): Observable<List<ReportItem>> {
+        return isReportTableHasData().subscribeOn(Schedulers.io()).toObservable()
+            .flatMap {
+                if (it) loadAllReports() else fetchAndSave(startDate)
+            }
     }
 
-    suspend fun updateReports(startDate: Date): List<ReportItem>? {
-        deleteAllReports()
-        return fetchAndSave(startDate)
+    fun updateReports(startDate: Date): Observable<List<ReportItem>> {
+        return fetchAndSave(startDate).doOnSubscribe { localDataSource.deleteAll() }
     }
 
-    private suspend fun fetchReports(startDate: Date): ReportResponse =
-        remoteDataSource.fetchReports(startDate)
+    private fun fetchReports(startDate: Date): Observable<ReportResponse> {
+        return remoteDataSource.fetchReports(startDate)
+    }
 
-    private suspend fun loadAllReports(): List<ReportItem>? {
-        return localDataSource.loadAllReports().map {
-            reportEntityMapper.map(it)
+    private fun loadAllReports(): Observable<List<ReportItem>> {
+        return localDataSource.loadAllReports().toObservable()
+            .map {
+                reportEntityMapper.map(it)
+            }
+    }
+
+    private fun insertAllReports(reportResponse: ReportResponse) {
+        localDataSource.insertReport(reportEntityMapper.mapIntoReportEntity(reportResponse))
+    }
+
+    private fun fetchAndSave(startDate: Date): Observable<List<ReportItem>> {
+        return fetchReports(startDate).subscribeOn(Schedulers.io())
+            .filter {
+                it.reports != null
+            }.doOnNext {
+                insertAllReports(it)
+            }.map {
+                reportMapper.map(it.reports!!)
+            }
+    }
+
+    private fun isReportTableHasData(): Maybe<Boolean> {
+        return localDataSource.getRowCount().map {
+            it != 0
         }
     }
-
-    private suspend fun insertAllReports(reportEntityList: List<ReportEntity>) =
-        localDataSource.insertAllReports(reportEntityList)
-
-    private suspend fun deleteAllReports() =
-        localDataSource.deleteAll()
-
-    private suspend fun fetchAndSave(startDate: Date): List<ReportItem>? {
-        val reportResponse = fetchReports(startDate)
-        reportEntityMapper.mapIntoReportEntity(reportResponse)?.let {
-            insertAllReports(it)
-        }
-        return reportMapper.map(reportResponse)
-    }
-
-    private suspend fun isReportTableHasData(): Boolean = localDataSource.getRowCount() != 0
 }

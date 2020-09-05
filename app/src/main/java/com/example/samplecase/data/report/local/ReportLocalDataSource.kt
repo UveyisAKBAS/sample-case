@@ -2,25 +2,26 @@ package com.example.samplecase.data.report.local
 
 import com.example.samplecase.data.report.local.dao.ReportDao
 import com.example.samplecase.data.report.local.model.ReportEntity
+import io.reactivex.Maybe
 import javax.inject.Inject
 
 class ReportLocalDataSource @Inject constructor(
     private val reportDao: ReportDao
 ) : LocalDataSource {
 
-    override suspend fun loadAllReports(): List<ReportEntity> {
+    override fun loadAllReports(): Maybe<List<ReportEntity>> {
         return reportDao.loadAll()
     }
 
-    override suspend fun insertAllReports(reportEntityList: List<ReportEntity>) {
-        reportDao.insertAll(reportEntityList)
+    override fun insertReport(reportEntityList: List<ReportEntity>) {
+        reportDao.insert(reportEntityList)
     }
 
-    override suspend fun getRowCount(): Int {
+    override fun getRowCount(): Maybe<Int> {
         return reportDao.getRowCount()
     }
 
-    override suspend fun deleteAll() {
+    override fun deleteAll() {
         reportDao.deleteAll()
     }
 }

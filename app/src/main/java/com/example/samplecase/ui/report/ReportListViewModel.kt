@@ -26,4 +26,10 @@ class ReportListViewModel @Inject constructor(
             startDate
         ) { response -> reportList.value = response }
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        getReportsUseCase.dispose()
+        updateReportsUseCase.dispose()
+    }
 }

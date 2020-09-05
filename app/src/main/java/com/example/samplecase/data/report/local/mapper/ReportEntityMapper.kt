@@ -5,18 +5,21 @@ import com.example.samplecase.data.report.local.model.ReportEntity
 import com.example.samplecase.data.report.remote.model.ReportResponse
 import com.example.samplecase.domain.report.model.ReportItem
 
-class ReportEntityMapper : BaseMapper<ReportEntity, ReportItem> {
-    override fun map(response: ReportEntity): ReportItem {
-        return ReportItem(
-            title = response.title,
-            description = response.description,
-            url = response.url,
-            urlToImage = response.urlToImage
-        )
+class ReportEntityMapper : BaseMapper<List<ReportEntity>, List<ReportItem>> {
+
+    override fun map(response: List<ReportEntity>): List<ReportItem> {
+        return response.map {
+            ReportItem(
+                title = it.title,
+                description = it.description,
+                url = it.url,
+                urlToImage = it.urlToImage
+            )
+        }
     }
 
-    fun mapIntoReportEntity(reportResponse: ReportResponse): List<ReportEntity>? {
-        return reportResponse.reports?.map {
+    fun mapIntoReportEntity(response: ReportResponse): List<ReportEntity> {
+        return response.reports!!.map {
             ReportEntity(
                 author = it.author,
                 title = it.title,

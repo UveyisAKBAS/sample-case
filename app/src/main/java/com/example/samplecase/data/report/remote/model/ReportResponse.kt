@@ -9,5 +9,5 @@ data class ReportResponse(
     @SerializedName("totalResults")
     val totalResults: Int,
     @SerializedName("articles")
-    val reports: ArrayList<Report>?
+    val reports: List<Report>?
 ) : BaseResponse()

@@ -5,21 +5,23 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.samplecase.data.report.local.model.ReportEntity
+import io.reactivex.Completable
+import io.reactivex.Maybe
 
 @Dao
 interface ReportDao {
 
     @Query("SELECT * FROM ReportEntity")
-    fun loadAll(): List<ReportEntity>
+    fun loadAll(): Maybe<List<ReportEntity>>
 
     @Query("SELECT COUNT(*) FROM ReportEntity")
-    fun getRowCount(): Int
+    fun getRowCount(): Maybe<Int>
 
     @Insert
-    fun insertAll(reportEntityList: List<ReportEntity>)
+    fun insert(reportEntity: List<ReportEntity>)
 
     @Delete
-    fun delete(reportEntity: ReportEntity)
+    fun delete(reportEntity: ReportEntity): Completable
 
     @Query("DELETE FROM ReportEntity")
     fun deleteAll()

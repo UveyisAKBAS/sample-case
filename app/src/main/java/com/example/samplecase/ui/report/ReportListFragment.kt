@@ -24,7 +24,7 @@ class ReportListFragment : BaseMvvmFragment<ReportListViewModel, FragmentReportL
 
     override fun initViews() {
 
-        viewModel.getReports("2020-07-22".toDate())
+        viewModel.getReports("2020-09-02".toDate())
 
         binding.reportViewModel = viewModel
 

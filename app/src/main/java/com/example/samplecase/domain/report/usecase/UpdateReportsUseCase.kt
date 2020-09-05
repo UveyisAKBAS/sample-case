@@ -12,7 +12,7 @@ class UpdateReportsUseCase @Inject constructor(
 
     fun execute(
         startDate: Date?,
-        callback: suspend (List<ReportItem>?) -> Unit
+        callback: (List<ReportItem>?) -> Unit
     ) {
         super.execute(
             startDate,

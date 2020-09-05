@@ -1,8 +1,13 @@
 package com.example.samplecase.domain.base.usecase
 
+import android.util.Log
 import com.example.samplecase.domain.report.model.ReportItem
 import com.example.samplecase.util.ReportIdlingResource
-import kotlinx.coroutines.*
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import java.util.*
 import javax.inject.Inject
 
@@ -10,31 +15,30 @@ abstract class BaseReportUseCase : BaseUseCase() {
 
     @Inject
     lateinit var reportIdlingResource: ReportIdlingResource
+    private val disposable = CompositeDisposable()
+    private val tag = BaseReportUseCase::class.simpleName
 
     fun execute(
         startDate: Date?,
-        repositoryCallback: suspend (Date) -> List<ReportItem>?,
-        liveDataCallback: suspend (List<ReportItem>?) -> Unit
+        repositoryCallback: (Date) -> Observable<List<ReportItem>>,
+        liveDataCallback: (List<ReportItem>?) -> Unit
     ) {
         if (startDate == null) return
 
-        CoroutineScope(Dispatchers.IO).launch {
-            reportIdlingResource.setIsIdle(false)
+        reportIdlingResource.setIsIdle(false)
 
-            try {
-                if (isActive) {
-                    val response = repositoryCallback(startDate)
-                    withContext(Dispatchers.Main) {
-                        liveDataCallback(response)
-                    }
-                }
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    liveDataCallback(null)
-                }
-            }
-        }
+        disposable.add(
+            repositoryCallback(startDate).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribeBy(
+                    onNext = { liveDataCallback(it) },
+                    onError = { Log.e(tag, "error: $it") }
+                )
+        )
 
         reportIdlingResource.setIsIdle(true)
+    }
+
+    fun dispose() {
+        disposable.dispose()
     }
 }
