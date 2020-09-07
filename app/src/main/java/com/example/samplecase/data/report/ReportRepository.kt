@@ -49,5 +49,7 @@ class ReportRepository @Inject constructor(
         return reportMapper.map(reportResponse)
     }
 
-    private suspend fun isReportTableHasData(): Boolean = localDataSource.getRowCount() != 0
+    private suspend fun isReportTableHasData(): Boolean {
+        return localDataSource.getRowCount() != 0
+    }
 }
