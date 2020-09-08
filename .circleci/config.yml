@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/sample-case
+    working_directory: ~/code/sample-case
     docker:
       - image: circleci/android:api-25-alpha
     environment:
@@ -15,7 +15,7 @@ jobs:
       #         command: sudo chmod +x ./gradlew
       - run:
           name: Download Dependencies
-          command: sudo chmod +x ./gradlew androidDependencies
+          command: sudo chmod +x ./gradlew
       - save_cache:
           paths:
             - ~/.gradle
