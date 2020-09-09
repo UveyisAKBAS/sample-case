@@ -6,7 +6,11 @@ jobs:
       - image: circleci/android:api-30
     environment:
       JVM_OPTS: -Xmx3200m
-      FASTLANE_LANE: test
+      LC_ALL: en_US.UTF-8
+      LANG: en_US.UTF-8
+      FASTLANE_ACTION_ANDROID_DEPENDENCIES: androidDependencies
+      FASTLANE_ACTION_BUILD: build
+      FASTLANE_ACTION_TEST: test
     steps:
       - checkout
       - run:
@@ -20,10 +24,11 @@ jobs:
           name: Download Ruby Dependency
           command: bundle check || bundle install --path vendor/bundle
       - run:
+          name: Give permission for gradlew
+          command: sudo chmod +x ./gradlew
+      - run:
           name: Download Android Dependencies
-          command: |
-            sudo chmod +x ./gradlew
-            ./gradlew androidDependencies
+          command: bundle exec fastlane $FASTLANE_ACTION_ANDROID_DEPENDENCIES
       - save_cache:
           paths:
             - ~/.gradle
@@ -34,11 +39,10 @@ jobs:
           key: 1-gems-{{ checksum "Gemfile.lock" }}
       - run:
           name: Build apk
-          command: |
-            ./gradlew build
+          command: bundle exec fastlane $FASTLANE_ACTION_BUILD
       - run:
-          name: Fastlane Run Test
-          command: bundle exec fastlane $FASTLANE_LANE
+          name: Run Test
+          command: bundle exec fastlane $FASTLANE_ACTION_TEST
       - store_artifacts:
           path: app/build/reports
           destination: reports

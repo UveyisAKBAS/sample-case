@@ -38,3 +38,9 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+task myTask {
+    doLast {
+        println "This is a custom task."
+    }
+}

@@ -1,15 +1,3 @@
-# This file contains the fastlane.tools configuration
-# You can find the documentation at https://docs.fastlane.tools
-#
-# For a list of all available actions, check out
-#
-#     https://docs.fastlane.tools/actions
-#
-# For a list of all available plugins, check out
-#
-#     https://docs.fastlane.tools/plugins/available-plugins
-#
-
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
@@ -19,6 +7,21 @@ platform :android do
   desc "Runs all the tests"
   lane :test do
     gradle(task: "test")
+  end
+
+  desc "Build project"
+  lane :build do
+    gradle(task: "build -x test")
+  end
+
+  desc "Download Android Dependencies"
+  lane :androidDependencies do
+    gradle(task: "androidDependencies")
+  end
+
+  desc "Accept licences"
+  lane :acceptLicences do
+    sh("yes | sdkmanager --licenses || true")
   end
 
   desc "Submit a new Beta Build to Crashlytics Beta"
